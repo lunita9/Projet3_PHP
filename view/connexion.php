@@ -1,6 +1,6 @@
 <?php
 
-session_start(); 
+
 if(isset($_POST['connexion'])) { 
     if(empty($_POST['pseudo'])) {
         echo "Le champ Pseudo est vide.";

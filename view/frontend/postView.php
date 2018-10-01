@@ -1,7 +1,8 @@
+
 <?php $title = htmlspecialchars($post['title']); ?>
 
 <?php ob_start(); ?>
-<h1>Billet simple pour l'Alaska</h1>
+<!--<h1>Billet simple pour l'Alaska</h1>-->
 <p><a href="index.php">Retour à la liste des billets</a></p>
 
 <div class="news">
@@ -10,9 +11,13 @@
         <em>le <?= $post['date_fr'] ?></em>
     </h3>
     
-    <p>
-        <?= nl2br(htmlspecialchars($post['content'])) ?>
-    </p>
+    <textarea id="contenu" readonly>
+       <!-- <?= nl2br(htmlspecialchars($post['content'])) ?> -->
+        <?php $content1 = $post['content'];
+              if (get_magic_quotes_gpc()) $content1 = stripslashes($content1); 
+              echo $content1; 
+        ?> 
+    </textarea>
 </div>
 
 <h2>Commentaires</h2>
@@ -37,9 +42,11 @@ while ($comment = $comments->fetch())
 ?>
     <p><strong><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['com_date_fr'] ?></p>
     <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
+    <p><a href="index.php?action=signaler&amp;id=<?= $comment['id'] ?>">Signaler</a></p>
 <?php
 }
 ?>
 <?php $content = ob_get_clean(); ?>
-
+<?php $afficheBio = false; ?>
+<?php $afficheAccesAdmin = false; ?>
 <?php require('template.php'); ?>

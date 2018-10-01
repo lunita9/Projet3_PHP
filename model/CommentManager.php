@@ -18,7 +18,6 @@ class CommentManager
 
         return $affectedLines;
     }
-    
 
     private function dbConnect()
     {
@@ -52,6 +51,30 @@ class CommentManager
     
 
     $q->execute();
+    }
+    
+    public function signaler($commentID)
+    {
+        //$q = $this->db->prepare('UPDATE comments SET signaler = signaler + 1 WHERE id = :commentID' );
+        //$q->bindValue(':commentID', $commentID);
+        $db = $this->dbConnect();
+        $q = $db->prepare('UPDATE comments SET signaler = signaler + 1 WHERE id = ?');
+        $q->execute(array($commentID));
+        
+    }
+    
+    public function dessignaler($commentID)
+    {
+        $db = $this->dbConnect();
+        $q = $db->prepare('UPDATE comments SET signaler = 0 WHERE id = ?');
+        $q->execute(array($commentID));
+    }
+    
+    public function supprimer_comment($commentID)
+    {
+        $db = $this->dbConnect();
+        $q = $db->prepare('DELETE FROM comments WHERE id = ?');
+        $q->execute(array($commentID));
     }
     
     function delete(CommentEntity $comments)

@@ -23,6 +23,83 @@ function post()
     require('view/frontend/postView.php');
 }
 
+function addArticle($titre, $contenu)
+{
+    $postManager = new PostManager();
+
+    $affectedLines = $postManager->addArticle($titre, $contenu);
+
+    if ($affectedLines === false) {
+        throw new Exception('Impossible d\'ajouter l\'article !');
+    }
+    else {
+        header('Location: index.php?action=listPosts');
+    }
+}
+
+function updateArticle($articleID, $titre, $contenu)
+{
+    $postManager = new PostManager();
+
+    $affectedLines = $postManager->updateArticle($articleID, $titre, $contenu);
+
+    if ($affectedLines === false) {
+        throw new Exception('Impossible de modifier l\'article !');
+    }
+    else {
+        header('Location: index.php?action=listPosts');
+    }
+}
+
+function signaler($commentID)
+{
+    $commentManager = new CommentManager();
+    $affectedLines = $commentManager->signaler($commentID);
+    if ($affectedLines === false){
+        throw new Exception('Impossible de modifier le commentaire !');
+    }
+    else{
+        header('Location: index.php?action=listPosts');
+    }
+}
+
+function dessignaler($commentID)
+{
+    $commentManager = new CommentManager();
+    $affectedLines = $commentManager->dessignaler($commentID);
+    if ($affectedLines === false){
+        throw new Exception('Impossible de modifier le commentaire !');
+    }
+    else{
+        header('Location: index.php?action=auteur');
+    }
+}
+
+function supprimer_comment($commentID)
+{
+    $commentManager = new CommentManager();
+    $affectedLines = $commentManager->supprimer_comment($commentID);
+    if ($affectedLines === false){
+        throw new Exception('Impossible de supprimer le commentaire !');
+    }
+    else{
+        header('Location: index.php?action=auteur');
+    }
+}
+
+function supprimer_billets($postId)
+{
+    $postManager = new PostManager();
+    $affectedLines = $postManager->supprimer_billets($postId);
+    if ($affectedLines === false){
+        throw new Exception('Impossible de supprimer l\'article !');
+    }
+    else{
+        header('Location: index.php?action=auteur');
+    }
+}
+
+
 function addComment($postId, $author, $comment)
 {
     $commentManager = new CommentManager();
@@ -51,4 +128,12 @@ function verificationAdmin()
 function biographieAuteur()
 {
     require('view/biographie.php');
+}
+function administration()
+{
+    require('view/administration.php');
+}
+function redaction()
+{
+    require('view/rediger_news.php');
 }
