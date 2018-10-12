@@ -1,5 +1,6 @@
 <?php
 require('controller/frontend.php');
+
 //require('model/PostEntity.php');
 if(!isset($_SESSION )){
     session_start();
