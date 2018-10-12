@@ -51,47 +51,8 @@
  
                     
  <?php
-  $db = new PDO('mysql:host=localhost;dbname=blog_auteur;charset=utf8', 'root', '');
-//-----------------------------------------------------
-// Vérification 1 : est-ce qu'on veut poster une news ?
-//-----------------------------------------------------
-if (isset($_POST['title']) AND isset($_POST['content']))
-{
-    $title = ($_POST['title']);
-    $content = ($_POST['content']);
-    // On vérifie si c'est une modification de news ou non.
-    if ($_POST['articleID'] == 0)
-    {
-        
-       $req = $db->prepare('INSERT INTO articles(title, content, date_creation) VALUES(:title, :content, NOW())');
-                        $req->execute(array(
-                          
-                        ':title' => $_POST['title'],
-                        ':content' => $_POST['content']));
-         
-    }
-    else
-    {
-       
-        
-        // C'est une modification, on met juste à jour le titre et le contenu.
-          
-        $db->exec("UPDATE articles SET title='" . $title . "', content='" . $content . "' WHERE id='" . $_POST['articleID'] . "'");
-          
-    }
-}
-   
-//--------------------------------------------------------
-// Vérification 2 : est-ce qu'on veut supprimer une news ?
-//--------------------------------------------------------
-if (isset($_GET['supprimer_billets'])) // Si l'on demande de supprimer une news.
-{
-    // Alors on supprime la news correspondante.
-    
-    
-     
-        $db->exec('DELETE FROM articles WHERE id=\'' . $_GET['supprimer_billets'] . '\'');
-}
+   require_once('model/PostManager.php');
+ 
 ?>
  
   <table class="table table-bordered table-striped table-condensed">
@@ -116,8 +77,9 @@ if (isset($_GET['supprimer_billets'])) // Si l'on demande de supprimer une news.
 <?php
   
 // On fait une boucle pour lister les news.
-  
-$req = $db->query('SELECT id, title, content, DATE_FORMAT(date, \'%d/%m/%Y à %Hh%imin%ss\') AS date_creation FROM articles ORDER BY id DESC');
+$postManager = new PostManager();
+$req = $postManager->getPosts();
+//$req = $db->query('SELECT id, title, content, DATE_FORMAT(date, \'%d/%m/%Y à %Hh%imin%ss\') AS date_creation FROM articles ORDER BY id DESC');
 while ($donnees = $req->fetch())
 {
 ?>
@@ -128,7 +90,7 @@ while ($donnees = $req->fetch())
         <!--<td><?php echo '<a href="index.php?action=backend&sousaction=modifArticle&id=' . $donnees['id'] . '">'; ?>Modifier</a></td>-->
         <!--<td><?php echo '<a href="index.php?action=backend&sousaction=supprArticle&id=' . $donnees['id'] . '">'; ?>Supprimer</a></td>-->
         <td><?php echo stripslashes($donnees['title']); ?></td>
-        <td><?php echo $donnees['date_creation']; ?></td>
+        <td><?php echo $donnees['date_fr']; ?></td>
     </tr>
 <?php
 } // Fin de la boucle qui liste les news.
@@ -137,17 +99,6 @@ while ($donnees = $req->fetch())
                     </table><br/><br/>
                 </div>
 
-<?php 
-    
-
-    if(isset($_GET['dessignaler']))
-    {
-         $db->exec('UPDATE comments SET signaler = 0 WHERE id=\'' .$GET['dessignaler'] . '\'');//WHERE id=?;
-    }if(isset($_GET['supprimer_comment']))
-    {
-        $db->exec('DELETE FROM comments WHERE id=\'' . $_GET['supprimer_comment'] . '\'');
-    }
-?>
 
         <table class="table table-bordered table-striped table-condensed">
    <caption>
@@ -165,7 +116,9 @@ while ($donnees = $req->fetch())
                 </thead>
       <tbody>
    <?php
-           $req = $db->query('SELECT id, author, comment FROM comments WHERE signaler>0');//UPDATE comments SET signaler = signaler + 1 WHERE id = ?'); 
+          $commentManager = new CommentManager();
+          $req = $commentManager->getSignalComments();
+           //$req = $db->query('SELECT id, author, comment FROM comments WHERE signaler>0');//UPDATE comments SET signaler = signaler + 1 WHERE id = ?'); 
             while($donnees=$req->fetch())
             {
             ?>

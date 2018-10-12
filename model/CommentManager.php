@@ -9,6 +9,14 @@ class CommentManager
 
         return $comments;
     }
+    
+    public function getSignalComments()
+    {
+        $db = $this->dbConnect();
+        $req = $db->query('SELECT id, author, comment FROM comments WHERE signaler>0');
+        
+        return $req;
+    }
 
     public function postComment($postId, $author, $comment)
     {

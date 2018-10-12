@@ -2,6 +2,7 @@
 
 // Chargement des classes
 require_once('model/PostManager.php');
+require_once('model/PostEntity.php');
 require_once('model/CommentManager.php');
 
 function listPosts()
@@ -28,6 +29,20 @@ function addArticle($titre, $contenu)
     $postManager = new PostManager();
 
     $affectedLines = $postManager->addArticle($titre, $contenu);
+
+    if ($affectedLines === false) {
+        throw new Exception('Impossible d\'ajouter l\'article !');
+    }
+    else {
+        header('Location: index.php?action=listPosts');
+    }
+}
+
+function addArticlePOO(PostEntity $article)
+{
+    $postManager = new PostManager();
+
+    $affectedLines = $postManager->add($article);
 
     if ($affectedLines === false) {
         throw new Exception('Impossible d\'ajouter l\'article !');

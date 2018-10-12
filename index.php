@@ -1,5 +1,6 @@
 <?php
 require('controller/frontend.php');
+//require('model/PostEntity.php');
 if(!isset($_SESSION )){
     session_start();
 }
@@ -100,7 +101,11 @@ try {
             if (isset($_GET['articleID'])){
                 if($_GET['articleID']==0){ //Ajout article
                     if (!empty($_POST['titre']) && !empty($_POST['contenu'])) {
-                        addArticle($_POST['titre'], $_POST['contenu']);
+                        //addArticle($_POST['titre'], $_POST['contenu']);
+                        $article = new PostEntity();
+                        $article->setTitre($_POST['titre']);
+                        $article->setContenu($_POST['contenu']);
+                        addArticlePOO($article);
                     }
                     else {
                         throw new Exception('Tous les champs ne sont pas remplis !');

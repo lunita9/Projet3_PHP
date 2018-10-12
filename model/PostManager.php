@@ -21,15 +21,20 @@ class PostManager
     
     public function add(PostEntity $post)
     {
-        $q = $this->db->prepare('INSERT INTO articles(id, title, content, DATE_FORMAT(date, \'%d/%m/%Y à %Hh%imin%ss\')) VALUES(:id, :title, :content, :date)');
+        $db = $this->dbConnect();
+        $articles = $db->prepare('INSERT INTO articles(title, content, date) VALUES(?, ?, NOW())');
+        $affectedLines = $articles->execute(array($post->getTitre(),$post->getContenu()));
+        return $affectedLines;
 
-    $q->bindValue(':id', $post->getId());
-    $q->bindValue(':title', $post->getTitle());
-    $q->bindValue(':content', $post->getContent());
-    $q->bindValue(':date', $post->getDate());
-    
+//        $q = $this->db->prepare('INSERT INTO articles(id, title, content, DATE_FORMAT(date, \'%d/%m/%Y à %Hh%imin%ss\')) VALUES(:id, :title, :content, :date)');
+//
+//    $q->bindValue(':id', $post->getId());
+//    $q->bindValue(':title', $post->getTitle());
+//    $q->bindValue(':content', $post->getContent());
+//    $q->bindValue(':date', $post->getDate());
+//    
 
-    $q->execute();
+    //$q->execute();
     }
     
     public function addArticle($titre, $contenu)
