@@ -1,13 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
-    <!--<header>
-    <div id="titre_principal">
-    <h1>Billet simple pour l'Alaska<br/>Biographie</h1>
-    </div>
     
-   
-        
-</header>-->
     <head>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">

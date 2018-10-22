@@ -4,6 +4,7 @@
 require_once('model/PostManager.php');
 require_once('model/PostEntity.php');
 require_once('model/CommentManager.php');
+require_once('model/UserManager.php');
 
 function listPosts()
 {
@@ -24,22 +25,43 @@ function post()
     require('view/frontend/postView.php');
 }
 
-function addArticle($titre, $contenu)
+function redaction()
 {
+    
+ 
+if (isset($_GET['modifier_billets'])) // Si on demande de modifier une news.
+{
+    // On protège la variable « modifier_billets » pour éviter une faille SQL.
+    //$_GET['modifier_billets'] = ($_GET['modifier_billets']));
+    // On récupère les informations de la news correspondante.
+    
+//    $db = new PDO('mysql:host=localhost;dbname=blog_auteur;charset=utf8', 'root', ''); 
+//    $req = $db->query('SELECT * FROM articles WHERE id=\'' . $_GET['modifier_billets'] . '\'');
+//    while($donnees = $req->fetch()){
     $postManager = new PostManager();
-
-    $affectedLines = $postManager->addArticle($titre, $contenu);
-
-    if ($affectedLines === false) {
-        throw new Exception('Impossible d\'ajouter l\'article !');
-    }
-    else {
-        header('Location: index.php?action=listPosts');
-    }
+    $donnees = $postManager->getPost($_GET['modifier_billets']);
+      
+    // On place le titre et le contenu dans des variables simples.
+    $title = $donnees['title'];
+    $content = $donnees['content'];
+    $articleID = $donnees['id']; // Cette variable va servir pour se souvenir que c'est une modification.
+}
+else // C'est qu'on rédige une nouvelle news.
+{
+    // Les variables $titre et $contenu sont vides, puisque c'est une nouvelle news.
+    $title = '';
+    $content = '';
+    $articleID = 0; // La variable vaut 0, donc on se souviendra que ce n'est pas une modification.
+}
+require('view/rediger_news.php');
 }
 
-function addArticlePOO(PostEntity $article)
+function addArticlePOO($titre, $contenu)
 {
+    $article = new PostEntity();
+    $article->setTitre($titre);
+    $article->setContenu($contenu);
+    
     $postManager = new PostManager();
 
     $affectedLines = $postManager->add($article);
@@ -132,23 +154,38 @@ function vueConnexion()
 {
     require('view/login.php');
 }
-function verificationAdmin()
+function verificationAdmin($Pseudo, $MotDePasse)
 {
-    if(isset($_POST['connexion'])&& isset($_POST['mdp'])){
-        //var_dump($_POST);
-        require('view/connexion.php');
-    } 
-    
+    $userManager=new UserManager();
+    $validation=$userManager->VerificationOK($Pseudo, $MotDePasse);
+    if($validation===false){
+        throw new Exception('Le pseudo ou le mot de passe est incorrect, le compte n\'a pas été trouvé.');
+    }
+    else{
+        // on ouvre la session avec $_SESSION:
+        $_SESSION['mdp'] = $MotDePasse; 
+        header('Location:  index.php?action=auteur');
+    }
 }
+    
+       
+
 function biographieAuteur()
 {
     require('view/biographie.php');
 }
 function administration()
 {
-    require('view/administration.php');
+    $postManager = new PostManager();
+    $req = $postManager->getPosts();
+    
+    $commentManager = new CommentManager();
+    $reqs = $commentManager->getSignalComments();
+    include 'view/administration.php';
+    
+    
 }
-function redaction()
-{
-    require('view/rediger_news.php');
-}
+//function redaction()
+//{
+//    require('view/rediger_news.php');
+//}

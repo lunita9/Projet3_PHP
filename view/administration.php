@@ -18,28 +18,7 @@
 
 
     <body>
-     <!--<header>
-        <div class="container-fluid">
-         <nav class="navbar navbar-inverse navbar-fixed-top">
-	      <div class="container-fluid">
-           <div class="navbar-header">
-               <button type="button" data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle">
-                 <span class="icon-bar"></span>
-                 <span class="icon-bar"></span>
-                 <span class="icon-bar"></span>
-               </button>
-              <a href="#" class="navbar-brand" >Billet simple pour l'Alaska<br/>par Jean Forteroche</a>
-            </div>
-           <div class="collapse navbar-collapse">
-             <ul class="nav navbar-nav">       
-               <li class="active"><a href="index.php#accueil">Accueil</a></li>
-               <li><a href="index.php#qui">Biographie</a></li>
-               <li><a href="index.php#contact">Déconnexion</a></li>
-             </ul>
-           </div>
-		</div>
-       </nav>
-    </header>-->
+     
         <div id="section">
             <br/>
             
@@ -68,27 +47,18 @@
       </tr>
    </thead>
       <tbody>
-                        <!--<tr>
-                            <th></th>
-                            <th></th>
-                            <th>Titre</th>
-                            <th>Date</th>
-                        </tr>-->
+                        
 <?php
   
 // On fait une boucle pour lister les news.
-$postManager = new PostManager();
-$req = $postManager->getPosts();
-//$req = $db->query('SELECT id, title, content, DATE_FORMAT(date, \'%d/%m/%Y à %Hh%imin%ss\') AS date_creation FROM articles ORDER BY id DESC');
+
 while ($donnees = $req->fetch())
 {
 ?>
     <tr>
-        <!--<td><?php echo '<a href="view/rediger_news.php?modifier_billets=' . $donnees['id'] . '">'; ?>Modifier</a></td>-->
+        
         <td><?php echo '<a href="index.php?action=redaction&amp;modifier_billets=' . $donnees['id'] . '">'; ?>Modifier</a></td>
         <td><?php echo '<a href="index.php?action=supprimer_billets&amp;id=' . $donnees['id'] . '">'; ?>Supprimer</a></td>
-        <!--<td><?php echo '<a href="index.php?action=backend&sousaction=modifArticle&id=' . $donnees['id'] . '">'; ?>Modifier</a></td>-->
-        <!--<td><?php echo '<a href="index.php?action=backend&sousaction=supprArticle&id=' . $donnees['id'] . '">'; ?>Supprimer</a></td>-->
         <td><?php echo stripslashes($donnees['title']); ?></td>
         <td><?php echo $donnees['date_fr']; ?></td>
     </tr>
@@ -116,10 +86,8 @@ while ($donnees = $req->fetch())
                 </thead>
       <tbody>
    <?php
-          $commentManager = new CommentManager();
-          $req = $commentManager->getSignalComments();
-           //$req = $db->query('SELECT id, author, comment FROM comments WHERE signaler>0');//UPDATE comments SET signaler = signaler + 1 WHERE id = ?'); 
-            while($donnees=$req->fetch())
+          
+            while($donnees=$reqs->fetch())
             {
             ?>
                 <tr>

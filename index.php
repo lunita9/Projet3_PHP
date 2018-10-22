@@ -1,7 +1,7 @@
 <?php
 require('controller/frontend.php');
 
-//require('model/PostEntity.php');
+
 if(!isset($_SESSION )){
     session_start();
 }
@@ -51,9 +51,29 @@ try {
             biographieAuteur();
         }
         elseif($_GET['action']=='validation'){
-            verificationAdmin();
+            
+            
+            if(isset($_POST['connexion'])&& isset($_POST['mdp'])){ 
+                if(empty($_POST['pseudo'])) {
+                    echo "Le champ Pseudo est vide.";
+                }else {
+                    // on vérifie maintenant si le champ "Mot de passe" n'est pas vide"
+                    if(empty($_POST['mdp'])) {
+                        echo "Le champ Mot de passe est vide.";
+                    } else {
+                        // les champs sont bien posté et pas vide, on sécurise les données entrées par le membre:
+                        $Pseudo = htmlentities($_POST['pseudo']); 
+                        $MotDePasse = htmlentities($_POST['mdp']);
+                        verificationAdmin($Pseudo, $MotDePasse);
+                    }
+                }
+            
+            }
+            
+            
         }
         elseif($_GET['action']=='auteur'){
+            
             administration();
         }
         
@@ -102,11 +122,8 @@ try {
             if (isset($_GET['articleID'])){
                 if($_GET['articleID']==0){ //Ajout article
                     if (!empty($_POST['titre']) && !empty($_POST['contenu'])) {
-                        //addArticle($_POST['titre'], $_POST['contenu']);
-                        $article = new PostEntity();
-                        $article->setTitre($_POST['titre']);
-                        $article->setContenu($_POST['contenu']);
-                        addArticlePOO($article);
+                        
+                        addArticlePOO($_POST['titre'], $_POST['contenu']);
                     }
                     else {
                         throw new Exception('Tous les champs ne sont pas remplis !');

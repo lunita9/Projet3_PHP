@@ -4,7 +4,7 @@ class PostManager
     public function getPosts()
     {
         $db = $this->dbConnect();
-        $req = $db->query('SELECT id, title, content, DATE_FORMAT(date, \'%d/%m/%Y à %Hh%imin%ss\') AS date_fr FROM articles ORDER BY ID DESC LIMIT 0, 5');
+        $req = $db->query('SELECT id, title, content, DATE_FORMAT(date, \'%d/%m/%Y à %Hh%imin%ss\') AS date_fr FROM articles ORDER BY ID DESC');
 
         return $req;
     }
@@ -26,25 +26,10 @@ class PostManager
         $affectedLines = $articles->execute(array($post->getTitre(),$post->getContenu()));
         return $affectedLines;
 
-//        $q = $this->db->prepare('INSERT INTO articles(id, title, content, DATE_FORMAT(date, \'%d/%m/%Y à %Hh%imin%ss\')) VALUES(:id, :title, :content, :date)');
-//
-//    $q->bindValue(':id', $post->getId());
-//    $q->bindValue(':title', $post->getTitle());
-//    $q->bindValue(':content', $post->getContent());
-//    $q->bindValue(':date', $post->getDate());
-//    
 
-    //$q->execute();
     }
     
-    public function addArticle($titre, $contenu)
-    {
-        $db = $this->dbConnect();
-        $articles = $db->prepare('INSERT INTO articles(title, content, date) VALUES(?, ?, NOW())');
-        $affectedLines = $articles->execute(array($titre, $contenu));
-
-        return $affectedLines;
-    }
+    
     
     public function updateArticle($articleID, $titre, $contenu)
     {

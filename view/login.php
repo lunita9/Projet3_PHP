@@ -1,13 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
-    <!--<header>
-    <div id="titre_principal">
-    <h1>Billet simple pour l'Alaska<br/>Connexion</h1>
-    </div>
     
-   <a href="index.php">Retour à la page d'accueil</a><br/>
-        
-</header>-->
     <head>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
@@ -73,27 +66,27 @@
         <table>
             <tr>
                 <td>
-    <label>Pseudo: </label>
+                    <label>Pseudo: </label>
                 </td>
                 <td>
-    <input type="text" name="pseudo" value="" />
-     </td>
+                    <input type="text" name="pseudo" value="" />
+                </td>
             </tr>
             <tr>
-    <td>
-    <label>Mot de passe: </label>
-        </td>
                 <td>
-        <input type="password" name="mdp" value="" />
-     </td>
+                    <label>Mot de passe: </label>
+                </td>
+                <td>
+                    <input type="password" name="mdp" value="" />
+                </td>
             </tr>
             <tr>
-    <td>
-    <input type="submit" name="connexion" value="Connexion" />
-                    </td>
-                </tr>
-            </table>
+                <td>
+                    <input type="submit" name="connexion" value="Connexion" />
+                </td>
+            </tr>
+        </table>
     </form>
         
-    </body>
+  </body>
 </html>
