@@ -1,3 +1,6 @@
+<?php
+    if(isset($_SESSION['mdp'])){
+?>
 <!DOCTYPE html>
     <head>
         <meta charset="utf-8" />
@@ -107,3 +110,7 @@ while ($donnees = $req->fetch())
          
     </body>
 </html>
+
+<?php
+}
+?>

@@ -80,76 +80,35 @@
 
 
         
-        </div>
+      </div>
 
 
-        <!--<h1 class="text-center">Bienvenue dans notre espace</h1>
-        <img class="col-sm-12 col-md-5" src="assets/img/accueil.jpg" alt="Accueil">     
-        <p class="col-sm-12 col-md-7">Nous sommes spécialisés dans tous types de constructions et nous prenons en charge les projets de A à Z. Vous pouvez nous confier en toute confiance des projets de toutes dimensions, des plus simples aux plus osés. Notre équipe est efficace, réactive et compétente. Nous entretenons toujours un dialogue de tous les instants avec nos clients. Bien qu'à la pointe de notre activité nous pratiquons des prix rigoureux et adaptés à tous les budgets.</p>
-      </div>-->
 <?php if($afficheBio) { ?>
       <div class="jumbotron row" id="qui">
         <h1 class="text-center">Qui est Jean Forteroche?</h1>
         <img class="col-sm-12 col-md-5 col-md-push-7" src="public/images/forteroche.jpg" alt="Equipe"> 
-        <p class="col-sm-12 col-md-7 col-md-pull-5">L'Alaska a toujours inspiré Jean Forteroche. Il s'est juré de visiter cet endroit et d'écrire un roman sur chaque pays qu'il aura visité. Ainsi ce moment est arrivé et espère que ses extraits vous feront rêver.</p>
+        <p class="col-sm-12 col-md-7 col-md-pull-5">L'Alaska a toujours inspiré Jean Forteroche. Il s'est juré de visiter cet endroit et d'écrire un roman sur chaque pays qu'il aura visité. Ainsi ce moment est arrivé et espère que ses extraits vous feront rêver.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper. </p>
       </div>
 <?php } ?>
 
 <?php if($afficheAccesAdmin) { ?>
       <div class="jumbotron row" id="contact">
         <h1 class="text-center">Se connecter</h1>
-          <!--<img class="col-sm-12 col-md-5 col-md-push-7" src="public/images/interdit.png" alt="Interdit">-->
           <form class="col-lg-6" action="index.php?action=validation" method="post">
-        <!--<table>
-            <tr>
-                <td>
-    <label>Pseudo: </label>
-                </td>
-                <td>
-    <input type="text" name="pseudo" value="" />
-     </td>
-            </tr>
-            <tr>
-    <td>
-    <label>Mot de passe: </label>
-        </td>
-                <td>
-        <input type="password" name="mdp" value="" />
-     </td>
-            </tr>
-            <tr>
-    <td>
-    <input type="submit" name="connexion" value="Connexion" />
-                    </td>
-                </tr>
-            </table>
-    </form>
+        
+              <legend>Connexion</legend>
+                <div class="form-group">
+                  <label>Pseudo : </label>
+                  <input type="text" name="pseudo" value="" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label>Mot de passe : </label>
+                  <input type="password" name="mdp" value="" class="form-control"/>
+                </div>
+
+                <input type="submit" name="connexion" value="Connexion"/>
+            </form>     
           
-     <form class="col-lg-6">-->
-  <legend>Connexion</legend>
-    <div class="form-group">
-      <label>Pseudo : </label>
-      <input type="text" name="pseudo" value="" class="form-control">
-    </div>
-    <div class="form-group">
-      <label>Mot de passe : </label>
-      <input type="password" name="mdp" value="" class="form-control"/>
-    </div>
-    
-    <input type="submit" name="connexion" value="Connexion"/>
-</form>     
-          
-        <!--<form class="row">
-          <div class="form-group col-lg-4">
-            <input type="email" class="form-control" placeholder="Votre email">
-          </div>
-          <div class="form-group col-lg-8">
-            <textarea class="form-control" rows="3" placeholder="Votre message"></textarea>
-          </div>
-          <div class="form-group col-lg-12">
-            <button type="submit" class="btn btn-default pull-right">Envoyer</button>
-          </div>
-        </form>-->
       </div>
 <?php } ?>
     </div>

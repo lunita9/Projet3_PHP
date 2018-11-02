@@ -39,16 +39,6 @@ try {
             else{
                 throw new Exception('Aucun identifiant de commentaire envoyé');
             }
-        
-        } elseif($_GET['action']=='admin'){
-            
-            if(isset($_SESSION['mdp'])){
-            vueConnexion();
-        }
-        }
-        elseif($_GET['action']=='bio')
-        {
-            biographieAuteur();
         }
         elseif($_GET['action']=='validation'){
             
@@ -87,66 +77,70 @@ try {
             
             if(isset($_SESSION['mdp'])){
             
-               if(isset($_GET['id'])&& $_GET['id']>0){
-                supprimer_billets($_GET['id']);
-            } 
+              if(isset($_GET['id'])&& $_GET['id']>0){
+              supprimer_billets($_GET['id']);
+              } 
             
-            
-        }}
+            }
+        }
         elseif($_GET['action']=='supprimer_comment'){
             
             if(isset($_SESSION['mdp'])){
-            if(isset($_GET['id'])&& $_GET['id']>0){
+                if(isset($_GET['id'])&& $_GET['id']>0){
                 supprimer_comment($_GET['id']);
-            }
-        }}
+                }
+            } 
+        }
+        
         elseif($_GET['action']=='dessignaler'){
             
             if(isset($_SESSION['mdp'])){
-            if(isset($_GET['id']) && $_GET['id']>0){
-                dessignaler($_GET['id']);
-            }
-            else{
-                throw new Exception('Aucun identifiant de commentaire à remettre à jour');
-            }
-        }}
+                if(isset($_GET['id']) && $_GET['id']>0){
+                    dessignaler($_GET['id']);
+                }
+                else{
+                    throw new Exception('Aucun identifiant de commentaire à remettre à jour');
+                }
+            } 
+        }
 
-         elseif($_GET['action']=='deconnexion'){
+        elseif($_GET['action']=='deconnexion'){
              unset($_SESSION['mdp']);
              listPosts();
-         }
+        }
         elseif($_GET['action']=='backend'){
             
             
-            if(isset($_SESSION['mdp'])){
-            if (isset($_GET['articleID'])){
-                if($_GET['articleID']==0){ //Ajout article
-                    if (!empty($_POST['titre']) && !empty($_POST['contenu'])) {
-                        
-                        addArticlePOO($_POST['titre'], $_POST['contenu']);
-                    }
-                    else {
-                        throw new Exception('Tous les champs ne sont pas remplis !');
-                    }
-                }
+                if(isset($_SESSION['mdp'])){
+                    if (isset($_GET['articleID'])){
+                        if($_GET['articleID']==0){ //Ajout article
+                            if (!empty($_POST['titre']) && !empty($_POST['contenu'])) {
+
+                                addArticle($_POST['titre'], $_POST['contenu']);
+                            }
+                            else {
+                                throw new Exception('Tous les champs ne sont pas remplis !');
+                            }
+                        }
+
+                        elseif($_GET['articleID']>0){ //Modification
+                            if (!empty($_POST['titre']) && !empty($_POST['contenu'])) {
+                                updateArticle($_GET['articleID'], $_POST['titre'], $_POST['contenu']);
+                            }
+                            else {
+                                throw new Exception('Tous les champs ne sont pas remplis !');
+                            }
+                        }
+                        header('Location: index.php?action=auteur');
                 
-                elseif($_GET['articleID']>0){ //Modification
-                    if (!empty($_POST['titre']) && !empty($_POST['contenu'])) {
-                        updateArticle($_GET['articleID'], $_POST['titre'], $_POST['contenu']);
                     }
-                    else {
-                        throw new Exception('Tous les champs ne sont pas remplis !');
-                    }
-                }
-                 header('Location: index.php?action=auteur');
-                
+                } 
             }
-            }}
         
-    }else {
+        }else {
                 
-        listPosts();
-    }
+            listPosts();
+        }
         
     }
 
