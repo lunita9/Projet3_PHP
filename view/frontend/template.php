@@ -87,7 +87,7 @@
       <div class="jumbotron row" id="qui">
         <h1 class="text-center">Qui est Jean Forteroche?</h1>
         <img class="col-sm-12 col-md-5 col-md-push-7" src="public/images/forteroche.jpg" alt="Equipe"> 
-        <p class="col-sm-12 col-md-7 col-md-pull-5">L'Alaska a toujours inspiré Jean Forteroche. Il s'est juré de visiter cet endroit et d'écrire un roman sur chaque pays qu'il aura visité. Ainsi ce moment est arrivé et espère que ses extraits vous feront rêver.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper. </p>
+        <p class="col-sm-12 col-md-7 col-md-pull-5">L'Alaska a toujours inspiré Jean Forteroche. Il s'est juré de visiter cet endroit et d'écrire un roman sur chaque pays qu'il aura visité. Ainsi ce moment est arrivé et espère que ses extraits vous feront rêver. Jean Forteroche a déjà publier 5 livres racontant des pays ou endroits tous mystèrieux notamment le Venezuela. Des livres tous illustrés par des photographies fantastiques, gravures et archives mais aussi une documentation très enrichissante que ce soit historique ou bien actuelle. </p>
       </div>
 <?php } ?>
 

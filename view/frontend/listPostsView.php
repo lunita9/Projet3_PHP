@@ -3,7 +3,7 @@
 <?php ob_start(); ?>
 
 
-<p>Bonjour et bienvenue sur mon site dédié à mon nouveau roman "Billet simple pour l'Alaska".<br/> Chaque semaine je mettrai en ligne un extrait de mon livre déjà disponible dans les bacs.<br/> Je vous souhaite une bonne lecture et n'hésitez pas à commenter les épisodes afin que je puisse connaître vos préférences!!</p>
+<p>Bonjour et bienvenue sur mon site dédié à mon nouveau roman "Billet simple pour l'Alaska".<br/> Chaque mois je mettrai en ligne un extrait de mon livre déjà disponible dans les bacs.<br/> Je vous souhaite une bonne lecture et n'hésitez pas à commenter les épisodes afin que je puisse connaître vos préférences!!</p>
 
 
         
