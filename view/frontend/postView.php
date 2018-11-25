@@ -12,7 +12,7 @@
         </h3>
 
         <textarea id="contenu" readonly>
-            <?php $content1 = $post['content'];
+            <?php $content1 = htmlspecialchars($post['content']);
                   if (get_magic_quotes_gpc()) $content1 = stripslashes($content1); 
                   echo $content1; 
             ?> 

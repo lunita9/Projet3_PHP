@@ -44,7 +44,7 @@ function addComment($postId, $author, $comment)
 {
     $commentManager = new CommentManager();
 
-    $affectedLines = $commentManager->postComment($postId, $author, $comment);
+    $affectedLines = $commentManager->postComment($postId, htmlspecialchars($author), htmlspecialchars($comment));
 
     if ($affectedLines === false) 
     {

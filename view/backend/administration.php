@@ -97,7 +97,7 @@ while ($donnees = $req->fetch())
                     <td><?php echo '<a href="index.php?action=dessignaler&amp;id=' .$donnees['id']. '">'; ?>Annuler</a></td>
                     <td><?php echo '<a href="index.php?action=supprimer_comment&amp;id=' .$donnees['id'] . '">'; ?>Supprimer</a></td>
                     <td><?php echo stripslashes($donnees['author']); ?></td>
-                    <td><?php echo $donnees['comment']; ?></td>
+                    <td><?php echo htmlspecialchars($donnees['comment']); ?></td>
                 </tr>
 <?php
 } 
