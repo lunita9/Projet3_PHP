@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  Dim 25 nov. 2018 à 20:59
+-- Généré le :  mer. 28 nov. 2018 à 16:25
 -- Version du serveur :  5.7.19
 -- Version de PHP :  5.6.31
 
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `articles` (
   `content` longtext NOT NULL,
   `date` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `articles`
@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `signaler` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `articleID` (`articleID`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `comments`
@@ -94,7 +94,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `pseudo`, `mdp`) VALUES
-(1, 'EchoHash', '2ec09784b6d56530f65b066c7febdfe690f70de3c9f967df1f7f717128350052');
+(1, 'admin', '2ec09784b6d56530f65b066c7febdfe690f70de3c9f967df1f7f717128350052');
 
 --
 -- Contraintes pour les tables déchargées
